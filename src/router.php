@@ -46,6 +46,10 @@ function spustit($controller, $akce)
             require_once "models/Uzivatel.php";
             $aktivni_controller = new Uzivatele();
             break;
+        case "prispevky":
+            require_once "models/Prispevek.php";
+            $aktivni_controller = new Prispevek();
+        break;
     }
 
     // spusteni dane akce daneho controlleru
