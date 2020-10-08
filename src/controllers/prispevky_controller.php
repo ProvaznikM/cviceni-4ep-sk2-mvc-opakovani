@@ -2,7 +2,7 @@
 
 class Prispevky
 {
-    private function mam_dostatek_dat_k_vytvoreni_prispevku()
+    private function mam_dostatek_dat_k_vytvoreni()
     {
         // kontrola vyplnění formuláře
         if(!isset($_POST["nazev"]))
@@ -13,7 +13,7 @@ class Prispevky
         return true;
     }
 
-    private function data_k_vytvoreni_prispevku_jsou_v_pradku($nazev, $obsah)
+    private function data_k_vytvoreni_jsou_v_pradku($nazev, $obsah)
     {
         // kotrola pozadavku na prispevek
         if(strlen($nazev) < 1)
@@ -24,22 +24,22 @@ class Prispevky
         return true;
     }
 
-    public function vytvoreni_prispevku()
+    public function vytvoreni()
     {
-        if($this->mam_dostatek_dat_k_vytvoreni_prispevku())
+        if($this->mam_dostatek_dat_k_vytvoreni())
         {
             $nazev = trim($_POST["nazev"]);
             $obsah = trim($_POST["obsah"]);
 
-            if($this->data_k_vytvoreni_prispevku_jsou_v_pradku($nazev, $obsah))
+            if($this->data_k_vytvoreni_jsou_v_pradku($nazev, $obsah))
             {
                 $prispevek = new Prispevek($nazev, $obsah);
 
-                if($prispevek->vytvor_prispevek())
+                if($prispevek->vytvor())
                 {
                     // prispevek je uspesne vytvoren
                     // presmeruji ho na vytvoreni
-                    return spustit("prispevek", "vytvorit");
+                    return spustit("prispevky", "vytvorit");
                 }
                 else
                 {
@@ -57,23 +57,23 @@ class Prispevky
         else
         {
             // data ve formulari nejsou kompletni
-            require_once "views/prispevek/vytvorit.php";
+            require_once "views/prispevky/vytvorit.php";
         }
     }
 
     public function vytvorit()
     {
-        if($this->mam_dostatek_dat_k_vytvoreni_prispevku())
+        if($this->mam_dostatek_dat_k_vytvoreni())
         {
             $nazev = trim($_POST["nazev"]);
             $obsah = trim($_POST["obsah"]);
 
-            if(Prispevek::existuje_prispevej($nazev, $obsah))
+            if(Prispevek::existuje($nazev, $obsah))
             {
                 session_destroy();
                 session_start();
 
-                $_SESSION["prispevek"] = $nazev;
+                $_SESSION["prispevky"] = $nazev;
 
                 global $zakladni_url;
 
@@ -81,12 +81,12 @@ class Prispevky
             }
             else
             {
-                require_once "views/prispevek/vytvorit";
+                require_once "views/prispevky/vytvorit";
             }
         }
         else
         {
-            require_once "views/prispevek/vytvorit";
+            require_once "views/prispevky/vytvorit";
         }
     }
 }

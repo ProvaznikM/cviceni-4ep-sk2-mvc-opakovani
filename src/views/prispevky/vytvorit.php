@@ -4,7 +4,7 @@
 ?>
 
 <form action="?" method="post">
-    <input type="text" name="obsah" placeholder="Název..." value="<?php echo $nazev; ?>" /><br />
-    <input type="text" name="nazev" placeholder="Obsah..." value="<?php echo $obsah; ?>" /><br />
+    <input type="text" name="nazev" placeholder="Název..." value="<?php echo $nazev; ?>" /><br />
+    <input type="text" name="obsah" placeholder="Obsah..." value="<?php echo $obsah; ?>" /><br />
     <input type="submit" value="Vytvořit" />
 </form>
